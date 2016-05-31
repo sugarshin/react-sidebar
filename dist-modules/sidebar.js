@@ -363,11 +363,12 @@ var Sidebar = function (_React$Component) {
           { className: this.props.sidebarClassName, style: sidebarStyle, ref: 'sidebar' },
           this.props.sidebar
         ),
-        _react2.default.createElement('div', { style: overlayStyle,
+        _react2.default.createElement('div', { className: this.props.overlayClassName,
+          style: overlayStyle,
           onClick: this.overlayClicked, onTouchTap: this.overlayClicked }),
         _react2.default.createElement(
           'div',
-          { style: contentStyle },
+          { className: this.props.contentClassName, style: contentStyle },
           dragHandle,
           this.props.children
         )
@@ -391,8 +392,17 @@ Sidebar.propTypes = {
     dragHandle: _react2.default.PropTypes.object
   }),
 
+  // root component optional class
+  rootClassName: _react2.default.PropTypes.string,
+
   // sidebar optional class
   sidebarClassName: _react2.default.PropTypes.string,
+
+  // content optional class
+  contentClassName: _react2.default.PropTypes.string,
+
+  // overlay optional class
+  overlayClassName: _react2.default.PropTypes.string,
 
   // sidebar content to render
   sidebar: _react2.default.PropTypes.node.isRequired,
