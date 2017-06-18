@@ -270,11 +270,11 @@ var Sidebar = function (_Component) {
       var overlayStyle = _extends({}, defaultStyles.overlay, this.props.styles.overlay);
       var useTouch = this.state.dragSupported && this.props.touch;
       var isTouching = this.isTouching();
-      var rootProps = {
+      var rootProps = _extends({}, this.props.otherProps.root, {
         className: this.props.rootClassName,
         style: _extends({}, defaultStyles.root, this.props.styles.root),
         role: "navigation"
-      };
+      });
       var dragHandle = void 0;
 
       // sidebarStyle right/left
@@ -357,9 +357,10 @@ var Sidebar = function (_Component) {
             dragHandleStyle.left = 0;
           }
 
-          dragHandle = _react2.default.createElement('div', { style: dragHandleStyle,
+          dragHandle = _react2.default.createElement('div', _extends({}, this.props.otherProps.dragHandle, {
+            style: dragHandleStyle,
             onTouchStart: this.onTouchStart, onTouchMove: this.onTouchMove,
-            onTouchEnd: this.onTouchEnd, onTouchCancel: this.onTouchEnd });
+            onTouchEnd: this.onTouchEnd, onTouchCancel: this.onTouchEnd }));
         }
       }
 
@@ -368,18 +369,20 @@ var Sidebar = function (_Component) {
         rootProps,
         _react2.default.createElement(
           'div',
-          { className: this.props.sidebarClassName, style: sidebarStyle, ref: this.saveSidebarRef },
+          _extends({}, this.props.otherProps.sidebar, {
+            className: this.props.sidebarClassName, style: sidebarStyle, ref: this.saveSidebarRef }),
           this.props.sidebar
         ),
-        _react2.default.createElement('div', { className: this.props.overlayClassName,
+        _react2.default.createElement('div', _extends({}, this.props.otherProps.overlay, {
+          className: this.props.overlayClassName,
           style: overlayStyle,
           role: 'presentation',
           tabIndex: '0',
           onClick: this.overlayClicked
-        }),
+        })),
         _react2.default.createElement(
           'div',
-          { className: this.props.contentClassName, style: contentStyle },
+          _extends({}, this.props.otherProps.content, { className: this.props.contentClassName, style: contentStyle }),
           dragHandle,
           this.props.children
         )
@@ -446,7 +449,16 @@ Sidebar.propTypes = {
   onSetOpen: _propTypes2.default.func,
 
   // Intial sidebar width when page loads
-  defaultSidebarWidth: _propTypes2.default.number
+  defaultSidebarWidth: _propTypes2.default.number,
+
+  // Optional other props
+  otherProps: _propTypes2.default.shape({
+    root: _propTypes2.default.object,
+    sidebar: _propTypes2.default.object,
+    content: _propTypes2.default.object,
+    overlay: _propTypes2.default.object,
+    dragHandle: _propTypes2.default.object
+  })
 };
 
 Sidebar.defaultProps = {
@@ -460,7 +472,8 @@ Sidebar.defaultProps = {
   dragToggleDistance: 30,
   onSetOpen: function onSetOpen() {},
   styles: {},
-  defaultSidebarWidth: 0
+  defaultSidebarWidth: 0,
+  otherProps: {}
 };
 
 exports.default = Sidebar;

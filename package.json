@@ -4,7 +4,9 @@
   "author": "Paulus Schoutsen <Paulus@PaulusSchoutsen.nl>",
   "description": "A sidebar component for React.",
   "main": "dist-modules/index.js",
-  "jsnest:main": "src/index.js",
+  "files": [
+    "dist-modules"
+  ],
   "scripts": {
     "build": "babel src --out-dir dist-modules && webpack --colors --progress -p",
     "dev": "webpack --watch",
